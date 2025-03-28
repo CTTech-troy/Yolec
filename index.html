@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yolec Hub</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <meta name="description" content="Empowering Young people through impactful events and initiatives. Learn more about our journey and the visionary behind it.">
+    <meta name="keywords" content="events, community, empowerment, Tosin Adesile, young entrepreneurs, impactful initiatives">
+    <meta name="author" content="Tosin Adesile">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Empowering Communities - Tosin Adesile's Initiative">
+    <meta property="og:description" content="Discover impactful events and initiatives led by Tosin Adesile. Join us in making a difference.">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:url" content="https://yolechub.com">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Empowering Communities - Tosin Adesile's Initiative">
+    <meta name="twitter:description" content="Discover impactful events and initiatives led by Tosin Adesile. Join us in making a difference.">
+    <meta name="twitter:image" content="https://yolechub.co/images/logo.png">
+    <meta name="twitter:site" content="@yolechub">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Yolec Hub Logo">
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="events.html">Events</a>
+            <a href="founder.html">About the Founder</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Slideshow -->
+    <section class="hero slideshow-container" aria-label="Image Slideshow">
+        <div class="slideshow-wrapper">
+            <div class="slide fade">
+                <img src="images/event2.jpeg" alt="Event 2019">
+                <div class="caption">
+                    <h2>Event 2019: The Birth of This Great Initiative</h2>
+                    <p>Empowering bright young minds.</p>
+                    <a href="events.html" class="cta-button">Explore Events</a>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="images/event4.jpeg" alt="Event 2020">
+                <div class="caption">
+                    <h2>Event 2020: Expanding Our Reach</h2>
+                    <p>Discover how we made a difference in 2020.</p>
+                    <a href="events.html" class="cta-button">Learn More</a>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="images/event5.jpeg" alt="Event 2021">
+                <div class="caption">
+                    <h2>Event 2021: Achieving New Heights</h2>
+                    <p>Be part of our success story and future initiatives.</p>
+                    <a href="events.html" class="cta-button">Get Involved</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slideshow Controls -->
+        <div class="slideshow-controls">
+            <a class="prev" onclick="changeSlide(-1)" aria-label="Previous slide">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)" aria-label="Next slide">&#10095;</a>
+        </div>
+
+        <!-- Dots for Navigation -->
+        <div class="dots">
+            <span class="dot" onclick="currentSlide(1)" aria-label="Go to slide 1"></span>
+            <span class="dot" onclick="currentSlide(2)" aria-label="Go to slide 2"></span>
+            <span class="dot" onclick="currentSlide(3)" aria-label="Go to slide 3"></span>
+        </div>
+    </section>
+
+    <!-- JavaScript for Slideshow -->
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.querySelectorAll(".slide");
+            const dots = document.querySelectorAll(".dot");
+
+            slides.forEach((slide, index) => {
+                slide.style.display = "none";
+                if (dots[index]) {
+                    dots[index].classList.remove("active");
+                }
+            });
+
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+            if (dots[slideIndex - 1]) {
+                dots[slideIndex - 1].classList.add("active");
+            }
+
+            setTimeout(showSlides, 5000); // Change slide every 5 seconds
+        }
+
+        document.addEventListener("DOMContentLoaded", showSlides);
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 <strong>Our Program</strong>. All rights reserved.</p>
+        <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#" class="back-to-top">Back to Top ↑</a>
+        </p>
+    </footer>
+
+</body>
+</html>

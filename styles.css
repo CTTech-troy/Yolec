@@ -1,0 +1,320 @@
+/* Import Modern Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background: #003366;
+    color: white;
+
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    height: auto;
+    width: 60px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffcc00;
+}
+
+/* Hero Section with Slideshow */
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slideshow-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.hero .slide {
+    flex: 0 0 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.hero .slide img {
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+}
+
+.hero .caption {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.hero .caption h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.hero .caption p {
+    font-size: 1.2rem;
+}
+
+.hero .cta-button {
+    display: inline-block;
+    background: #ffcc00;
+    color: #333;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hero .cta-button:hover {
+    background: #ff9900;
+    transform: scale(1.05);
+}
+
+/* Event Section */
+.event-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 50px 10%;
+}
+
+.event {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.event img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.event p {
+    flex: 1;
+    padding: 15px;
+}
+
+/* Founder Section */
+.founder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 50px 10%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.founder-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #1e90ff;
+}
+
+.founder-text {
+    flex: 1;
+    max-width: 600px;
+    text-align: left;
+}
+
+/* Subscribe Section */
+.subscribe {
+    text-align: center;
+    padding: 30px 10%;
+    background: #f1f1f1;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subscribe form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.subscribe input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+}
+
+.subscribe button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.subscribe button:hover {
+    background: #1e90ff;
+}
+
+/* Footer */
+footer {
+    background: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+/* Responsive Fixes */
+@media (max-width: 1200px) {
+    .founder {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .hero {
+        height: 90vh;
+    }
+
+    .hero .caption {
+        width: 90%;
+        font-size: 0.9rem;
+    }
+
+    .event {
+        flex-direction: column;
+    }
+
+    .event img {
+        width: 100%;
+        height: auto;
+    }
+    
+}
+
+@media (max-width: 678px) {
+    .hero {
+        height: 85vh;
+    }
+
+    .hero .caption h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero .caption p {
+        font-size: 1rem;
+    }
+
+    .subscribe input {
+        width: 100%;
+    }
+
+    footer {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .hero {
+        height: 75vh;
+    }
+
+    .hero .caption h2 {
+        font-size: 1.2rem;
+    }
+
+    .hero .caption p {
+        font-size: 0.9rem;
+    }
+
+    .subscribe input {
+        width: 100%;
+    }
+}
