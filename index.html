@@ -1,126 +1,538 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yolec Hub</title>
-    <link rel="stylesheet" href="styles.css">
-
-    <meta name="description" content="Empowering Young people through impactful events and initiatives. Learn more about our journey and the visionary behind it.">
-    <meta name="keywords" content="events, community, empowerment, Tosin Adesile, young entrepreneurs, impactful initiatives">
-    <meta name="author" content="Tosin Adesile">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Empowering Communities - Tosin Adesile's Initiative">
-    <meta property="og:description" content="Discover impactful events and initiatives led by Tosin Adesile. Join us in making a difference.">
-    <meta property="og:image" content="images/logo.png">
-    <meta property="og:url" content="https://yolechub.com">
-    
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Empowering Communities - Tosin Adesile's Initiative">
-    <meta name="twitter:description" content="Discover impactful events and initiatives led by Tosin Adesile. Join us in making a difference.">
-    <meta name="twitter:image" content="https://yolechub.co/images/logo.png">
-    <meta name="twitter:site" content="@yolechub">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YolecHub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#1a237e',
+secondary: '#ffd700'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.modal {
+transition: opacity 0.3s ease-in-out;
+backdrop-filter: blur(5px);
+}
+.fade-in {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in.visible {
+opacity: 1;
+transform: translateY(0);
+}
+.nav-link {
+position: relative;
+}
+.nav-link::after {
+content: '';
+position: absolute;
+width: 0;
+height: 2px;
+bottom: -2px;
+left: 0;
+background-color: #ffd700;
+transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+width: 100%;
+}
+.event-card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.event-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.hero-slide {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+opacity: 0;
+transition: opacity 1.5s ease-in-out;
+background-size: cover;
+background-position: center;
+}
+.hero-slide.active {
+opacity: 1;
+}
+.like-button, .comment-button {
+transition: transform 0.2s ease;
+}
+.like-button:hover, .comment-button:hover {
+transform: scale(1.1);
+}
+.like-button.active {
+color: #e53e3e;
+}
+.grid-item {
+overflow: hidden;
+}
+.grid-item img {
+transition: transform 0.5s ease;
+}
+.grid-item:hover img {
+transform: scale(1.05);
+}
+.cta-button {
+position: relative;
+overflow: hidden;
+z-index: 1;
+}
+.cta-button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+transition: left 0.7s ease;
+z-index: -1;
+}
+.cta-button:hover::before {
+left: 100%;
+}
+.comment-box {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.3s ease;
+}
+.comment-box.open {
+max-height: 300px;
+}
+</style>
 </head>
-<body>
+<body class="bg-white">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 shadow-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<div class="flex-shrink-0">
+<img src="./images//logo.png" alt="yolecHub" class="h-10">
+</div>
+<div class="hidden md:flex space-x-8">
+<a href="#home" class="nav-link text-gray-700 hover:text-primary">Home</a>
+<a href="#about" class="nav-link text-gray-700 hover:text-primary">About</a>
+<a href="#events" class="nav-link text-gray-700 hover:text-primary">Events</a>
+<a href="#blog" class="nav-link text-gray-700 hover:text-primary">Blog</a>
+<a href="#contact" class="nav-link text-gray-700 hover:text-primary">Contact</a>
+</div>
 
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <img src="images/logo.png" alt="Yolec Hub Logo">
+</div>
+</div>
+</nav>
+<section id="home" class="relative min-h-screen pt-16">
+<div id="hero-slider" class="absolute inset-0">
+<div class="hero-slide active" style="background-image: url('https://public.readdy.ai/ai/img_res/79e737c2c3d41e6468ffcbf0db80684c.jpg');"></div>
+<div class="hero-slide" style="background-image: url('https://public.readdy.ai/ai/img_res/144caa65c20266523cbbd8912b9401cf.jpg');"></div>
+<div class="hero-slide" style="background-image: url('https://public.readdy.ai/ai/img_res/39933c85b025dfa575b7018e196393a9.jpg');"></div>
+</div>
+<div class="absolute inset-0 bg-black/50"></div>
+<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
+<div class="max-w-3xl fade-in">
+<h1 class="text-5xl md:text-7xl font-bold text-white mb-6">YolecHub</h1>
+<p class="text-xl text-white/90 mb-8">Where Innovation Meets Opportunity - Shaping Tomorrow's Technology Today</p>
+<div class="flex gap-4">
+<button class="cta-button !rounded-button bg-primary text-white px-8 py-3 text-lg cursor-pointer hover:bg-opacity-90 whitespace-nowrap">
+Events
+</button>
+<button class="!rounded-button bg-white text-primary px-8 py-3 text-lg cursor-pointer hover:bg-opacity-90 whitespace-nowrap">
+Learn More
+</button>
+</div>
+</div>
+</div>
+</section>
+<section id="about" class="py-24 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-2 gap-12 items-center">
+<div class="fade-in">
+<img src="./images/founder-img.png" alt="Founder" class="w-full h-[600px] object-cover rounded-lg shadow-lg">
+</div>
+<div class="fade-in">
+<h2 class="text-4xl font-bold text-gray-900 mb-6">Meet Tosin Adesile</h2>
+<p class="text-lg text-gray-600 mb-6">Tosin Adesile is the visionary behind this initiative, dedicated to empowering communities through impactful events and meaningful initiatives.
+
+    With a passion for creating change, Tosin has led numerous projects that have positively influenced lives. His mission is to inspire, educate, and uplift individuals to reach their full potential.</p>
+    <button id="viewCV" class="bg-primary text-white px-6 py-3 cursor-pointer hover:bg-opacity-90">
+        View CV
+    </button>
+    
+    <!-- Modal Structure -->
+    <div id="cvModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2 relative">
+            <button id="closeModal" class="absolute top-3 right-3 text-lg font-bold">&times;</button>
+            <h2 class="text-xl font-semibold mb-4">My CV</h2>
+            <iframe src="./Web CV.docx" class="w-full h-96"></iframe>
         </div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="events.html">Events</a>
-            <a href="founder.html">About the Founder</a>
-        </nav>
-    </header>
+    </div>
+    
+</div>
+</div>
+</div>
+</section>
+<section id="events" class="py-24 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-4xl font-bold text-center text-gray-900 mb-12 fade-in">Event Highlights</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
+<img src="./images/event11.jpeg" alt="Workshops" class="w-full h-64 object-cover">
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Entrpreneurship conference</h3>
+<p class="text-gray-600">2019 was the birth of the young people's entrpreneurship conference</p>
+</div>
+</div>
+<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
+<img src="./images/event8.jpeg" alt="Networking" class="w-full h-64 object-cover">
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Conference With Kgan</h3>
+<p class="text-gray-600">was an unforgettable expereince with Kagan.</p>
+</div>
+</div>
+<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
+<img src="./images/event4.jpeg" alt="Pitch Competition" class="w-full h-64 object-cover">
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Startup Pitch Competition</h3>
+<p class="text-gray-600">2020 .</p>
+</div>
+</div>
+<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
+<img src="./images/event5.jpeg" alt="Keynotes" class="w-full h-64 object-cover">
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Keynote Presentations</h3>
+<p class="text-gray-600">Thought-provoking talks from visionary leaders in technology.</p>
+</div>
+</div>
+<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
+<img src="./images/event6.jpeg" alt="Exhibition" class="w-full h-64 object-cover">
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Explore hornbale guests with Yolec</h3>
+<p class="text-gray-600"> An amazing Conference with Yolec we had hornbale guests.</p>
+</div>
+</div>
+<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
+<img src="./images/event7.jpeg" alt="Awards" class="w-full h-64 object-cover">
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Innovation Awards</h3>
+<p class="text-gray-600">Celebrating breakthrough technologies and visionary leaders.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="blog" class="py-24 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-4xl font-bold text-center text-gray-900 mb-12 fade-in">Latest Insights</h2>
+<div class="bg-white rounded-lg shadow-lg overflow-hidden fade-in">
+<div class="p-8">
+<h3 class="text-2xl font-bold text-gray-900 mb-4">The Future of AI in Business Transformation</h3>
+<p class="text-gray-600 mb-6">As we approach 2025, artificial intelligence continues to revolutionize how businesses operate. At this year's Global Tech Summit, industry leaders will explore how AI is not just automating processes but fundamentally reshaping business models and creating new opportunities for innovation and growth.</p>
+<p class="text-gray-600 mb-6">Our keynote speaker, Dr. Elena Rodriguez, will share insights from her groundbreaking research on adaptive AI systems and their implementation across various industries. Attendees will gain practical knowledge on how to leverage these technologies in their own organizations.</p>
+<div class="flex items-center justify-between mt-8">
+<div class="flex items-center text-gray-500">
+<span class="text-sm">May 15, 2024</span>
+<span class="mx-2">•</span>
+<span class="text-sm">By Abdulsalam Korede</span>
+</div>
+<div class="flex space-x-4">
+<button class="like-button flex items-center text-gray-500 hover:text-red-500">
+<i class="ri-heart-line ri-lg mr-1"></i>
+<span class="like-count">24</span>
+</button>
+<button class="comment-button flex items-center text-gray-500 hover:text-primary">
+<i class="ri-chat-1-line ri-lg mr-1"></i>
+<span>12</span>
+</button>
+</div>
+</div>
+<div class="comment-box mt-6 border-t pt-6">
+<h4 class="text-lg font-semibold mb-4">Comments</h4>
+<div class="space-y-4">
+<div class="bg-gray-50 p-4 rounded">
+<div class="flex items-center mb-2">
+<span class="font-medium">Michael Chen</span>
+<span class="text-sm text-gray-500 ml-2">• 2 days ago</span>
+</div>
+<p class="text-gray-600">Looking forward to Dr. Rodriguez's keynote! Her work on adaptive AI has been revolutionary.</p>
+</div>
+<div class="bg-gray-50 p-4 rounded">
+<div class="flex items-center mb-2">
+<span class="font-medium">Sophia Williams</span>
+<span class="text-sm text-gray-500 ml-2">• 1 day ago</span>
+</div>
+<p class="text-gray-600">Will there be any workshops specifically focused on implementing AI in healthcare?</p>
+</div>
+</div>
+<button id="initiateComment" class="mt-4 !rounded-button bg-gray-200 text-gray-700 px-4 py-2 cursor-pointer hover:bg-gray-300 whitespace-nowrap w-full text-left">Write a comment...</button>
+<div id="commentForm" class="mt-4 hidden">
+<textarea id="commentInput" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Add a comment..."></textarea>
+<div class="flex justify-end mt-2">
+<button id="cancelComment" class="!rounded-button bg-gray-200 text-gray-700 px-4 py-2 cursor-pointer hover:bg-gray-300 whitespace-nowrap mr-2">Cancel</button>
+<button id="submitComment" class="!rounded-button bg-primary text-white px-4 py-2 cursor-pointer hover:bg-opacity-90 whitespace-nowrap">Post Comment</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="contact" class="py-24 bg-primary text-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<h2 class="text-4xl font-bold mb-8 fade-in">Ready to Join the Innovation Revolution?</h2>
+<p class="text-xl mb-12 max-w-3xl mx-auto fade-in">Secure your spot at yolecHub and be part of shaping the future of technology.</p>
+<button class="cta-button !rounded-button bg-secondary text-primary px-10 py-4 text-xl font-bold cursor-pointer hover:bg-opacity-90 whitespace-nowrap fade-in">
+Join The Event
+</button>
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center fade-in">
+<div>
+<div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+<i class="ri-calendar-line ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">When</h3>
+<p>June 15-17, 2025</p>
+</div>
+<div>
+<div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+<i class="ri-map-pin-line ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Where</h3>
+<p>Tech Innovation Center, San Francisco</p>
+</div>
+<div>
+<div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+<i class="ri-ticket-line ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Tickets</h3>
+<p>Starting at $499</p>
+</div>
+</div>
+</div>
+</section>
+<footer class="bg-gray-900 text-white py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<img src="./images/logo.png" alt="yolecHub" class="h-10 mb-4">
+<p class="text-gray-400">Bringing together the world's most innovative minds in technology.</p>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
+<li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
+<li><a href="#events" class="text-gray-400 hover:text-white">Events</a></li>
+<li><a href="#blog" class="text-gray-400 hover:text-white">Blog</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Contact</h3>
+<ul class="space-y-2">
+<li class="flex items-center"><i class="ri-mail-line mr-2"></i> info@yolechub.com</li>
+<li class="flex items-center"><i class="ri-phone-line mr-2"></i> +1 (555) 123-4567</li>
+<li class="flex items-center"><i class="ri-map-pin-line mr-2"></i> San Francisco, CA</li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+<i class="ri-twitter-x-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+<i class="ri-linkedin-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+<i class="ri-facebook-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+<i class="ri-instagram-line"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+<p>&copy; 2025 yolecHub. All rights reserved.</p>
+</div>
+</div>
+</footer>
 
-    <!-- Hero Section with Slideshow -->
-    <section class="hero slideshow-container" aria-label="Image Slideshow">
-        <div class="slideshow-wrapper">
-            <div class="slide fade">
-                <img src="images/event2.jpeg" alt="Event 2019">
-                <div class="caption">
-                    <h2>Event 2019: The Birth of This Great Initiative</h2>
-                    <p>Empowering bright young minds.</p>
-                    <a href="events.html" class="cta-button">Explore Events</a>
-                </div>
-            </div>
-            <div class="slide fade">
-                <img src="images/event4.jpeg" alt="Event 2020">
-                <div class="caption">
-                    <h2>Event 2020: Expanding Our Reach</h2>
-                    <p>Discover how we made a difference in 2020.</p>
-                    <a href="events.html" class="cta-button">Learn More</a>
-                </div>
-            </div>
-            <div class="slide fade">
-                <img src="images/event5.jpeg" alt="Event 2021">
-                <div class="caption">
-                    <h2>Event 2021: Achieving New Heights</h2>
-                    <p>Be part of our success story and future initiatives.</p>
-                    <a href="events.html" class="cta-button">Get Involved</a>
-                </div>
-            </div>
-        </div>
 
-        <!-- Slideshow Controls -->
-        <div class="slideshow-controls">
-            <a class="prev" onclick="changeSlide(-1)" aria-label="Previous slide">&#10094;</a>
-            <a class="next" onclick="changeSlide(1)" aria-label="Next slide">&#10095;</a>
-        </div>
+<script>
+// Mock data
+const eventData = [
+{ title: "Interactive Workshops", description: "Hands-on sessions led by industry experts covering AI, blockchain, and more." },
+{ title: "Networking Sessions", description: "Connect with industry leaders, investors, and fellow innovators." },
+{ title: "Startup Pitch Competition", description: "Showcase your innovation and compete for investment opportunities." },
+{ title: "Keynote Presentations", description: "Thought-provoking talks from visionary leaders in technology." },
+{ title: "Tech Exhibition", description: "Explore cutting-edge products and services from leading companies." },
+{ title: "Innovation Awards", description: "Celebrating breakthrough technologies and visionary leaders." }
+];
+const blogData = {
+title: "The Future of AI in Business Transformation",
+content: "As we approach 2025, artificial intelligence continues to revolutionize how businesses operate. At this year's Global Tech Summit, industry leaders will explore how AI is not just automating processes but fundamentally reshaping business models and creating new opportunities for innovation and growth.",
+author: "James Wilson",
+date: "March 15, 2025",
+likes: 24,
+comments: [
+{ name: "Michael Chen", text: "Looking forward to Dr. Rodriguez's keynote! Her work on adaptive AI has been revolutionary.", time: "2 days ago" },
+{ name: "Sophia Williams", text: "Will there be any workshops specifically focused on implementing AI in healthcare?", time: "1 day ago" }
+]
+};
+document.addEventListener('DOMContentLoaded', function() {
+// Fade-in animation
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('visible');
+}
+});
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(element => {
+observer.observe(element);
+});
+// Hero slider
+const slides = document.querySelectorAll('.hero-slide');
+let currentSlide = 0;
+function nextSlide() {
+slides[currentSlide].classList.remove('active');
+currentSlide = (currentSlide + 1) % slides.length;
+slides[currentSlide].classList.add('active');
+}
+setInterval(nextSlide, 5000);
+// CV Modal
+// const modal = document.getElementById('cvModal');
+// const viewCV = document.getElementById('viewCV');
+// const closeModal = document.getElementById('closeModal');
 
-        <!-- Dots for Navigation -->
-        <div class="dots">
-            <span class="dot" onclick="currentSlide(1)" aria-label="Go to slide 1"></span>
-            <span class="dot" onclick="currentSlide(2)" aria-label="Go to slide 2"></span>
-            <span class="dot" onclick="currentSlide(3)" aria-label="Go to slide 3"></span>
-        </div>
-    </section>
+// if (modal && viewCV && closeModal) {
+//     viewCV.addEventListener('click', () => {
+//         modal.classList.remove('hidden');
+//         document.body.style.overflow = 'hidden';
+//     });
 
-    <!-- JavaScript for Slideshow -->
-    <script>
-        let slideIndex = 0;
+//     closeModal.addEventListener('click', () => {
+//         modal.classList.add('hidden');
+//         document.body.style.overflow = 'auto';
+//     });
 
-        function showSlides() {
-            const slides = document.querySelectorAll(".slide");
-            const dots = document.querySelectorAll(".dot");
+//     modal.addEventListener('click', (e) => {
+//         if (e.target === modal) {
+//             modal.classList.add('hidden');
+//             document.body.style.overflow = 'auto';
+//         }
+//     });
+// }
 
-            slides.forEach((slide, index) => {
-                slide.style.display = "none";
-                if (dots[index]) {
-                    dots[index].classList.remove("active");
-                }
-            });
 
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-
-            slides[slideIndex - 1].style.display = "block";
-            if (dots[slideIndex - 1]) {
-                dots[slideIndex - 1].classList.add("active");
-            }
-
-            setTimeout(showSlides, 5000); // Change slide every 5 seconds
-        }
-
-        document.addEventListener("DOMContentLoaded", showSlides);
-    </script>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 <strong>Our Program</strong>. All rights reserved.</p>
-        <p>
-            <a href="#">Privacy Policy</a> | 
-            <a href="#">Terms of Service</a> | 
-            <a href="#" class="back-to-top">Back to Top ↑</a>
-        </p>
-    </footer>
-
+// Like button functionality
+const likeButton = document.querySelector('.like-button');
+const likeCount = document.querySelector('.like-count');
+let isLiked = false;
+likeButton.addEventListener('click', () => {
+isLiked = !isLiked;
+if (isLiked) {
+likeButton.classList.add('active');
+likeButton.querySelector('i').classList.remove('ri-heart-line');
+likeButton.querySelector('i').classList.add('ri-heart-fill');
+likeCount.textContent = parseInt(likeCount.textContent) + 1;
+} else {
+likeButton.classList.remove('active');
+likeButton.querySelector('i').classList.remove('ri-heart-fill');
+likeButton.querySelector('i').classList.add('ri-heart-line');
+likeCount.textContent = parseInt(likeCount.textContent) - 1;
+}
+});
+// Comment button functionality
+const commentButton = document.querySelector('.comment-button');
+const commentBox = document.querySelector('.comment-box');
+const initiateComment = document.getElementById('initiateComment');
+const commentForm = document.getElementById('commentForm');
+const cancelComment = document.getElementById('cancelComment');
+let commentsOpen = false;
+commentButton.addEventListener('click', () => {
+  commentsOpen = !commentsOpen;
+  if (commentsOpen) {
+    commentBox.classList.add('open');
+  } else {
+    commentBox.classList.remove('open');
+  }
+});
+// Initiate comment functionality
+initiateComment.addEventListener('click', () => {
+  initiateComment.classList.add('hidden');
+  commentForm.classList.remove('hidden');
+});
+// Cancel comment functionality
+cancelComment.addEventListener('click', () => {
+  commentForm.classList.add('hidden');
+  initiateComment.classList.remove('hidden');
+  document.getElementById('commentInput').value = '';
+});
+// Submit comment functionality
+const commentInput = document.getElementById('commentInput');
+const submitComment = document.getElementById('submitComment');
+submitComment.addEventListener('click', () => {
+  const commentText = commentInput.value.trim();
+  if (commentText) {
+    const commentContainer = document.createElement('div');
+    commentContainer.className = 'bg-gray-50 p-4 rounded';
+    const commentHeader = document.createElement('div');
+    commentHeader.className = 'flex items-center mb-2';
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'font-medium';
+    nameSpan.textContent = 'You';
+    const timeSpan = document.createElement('span');
+    timeSpan.className = 'text-sm text-gray-500 ml-2';
+    timeSpan.textContent = '• just now';
+    const commentBody = document.createElement('p');
+    commentBody.className = 'text-gray-600';
+    commentBody.textContent = commentText;
+    commentHeader.appendChild(nameSpan);
+    commentHeader.appendChild(timeSpan);
+    commentContainer.appendChild(commentHeader);
+    commentContainer.appendChild(commentBody);
+    document.querySelector('.comment-box .space-y-4').appendChild(commentContainer);
+    commentInput.value = '';
+    
+    // Hide form and show button again
+    commentForm.classList.add('hidden');
+    initiateComment.classList.remove('hidden');
+    
+    // Update comment count
+    const commentCount = commentButton.querySelector('span');
+    commentCount.textContent = parseInt(commentCount.textContent) + 1;
+  }
+});
+});
+</script>
 </body>
 </html>
