@@ -183,18 +183,12 @@ Learn More
 <p class="text-lg text-gray-600 mb-6">Tosin Adesile is the visionary behind this initiative, dedicated to empowering communities through impactful events and meaningful initiatives.
 
     With a passion for creating change, Tosin has led numerous projects that have positively influenced lives. His mission is to inspire, educate, and uplift individuals to reach their full potential.</p>
-    <button id="viewCV" class="bg-primary text-white px-6 py-3 cursor-pointer hover:bg-opacity-90">
+    <button class="bg-primary text-white px-6 py-3 cursor-pointer hover:bg-opacity-90">
         View CV
     </button>
     
     <!-- Modal Structure -->
-    <div id="cvModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2 relative">
-            <button id="closeModal" class="absolute top-3 right-3 text-lg font-bold">&times;</button>
-            <h2 class="text-xl font-semibold mb-4">My CV</h2>
-            <iframe src="./Web CV.docx" class="w-full h-96"></iframe>
-        </div>
-    </div>
+  
     
 </div>
 </div>
@@ -428,29 +422,6 @@ currentSlide = (currentSlide + 1) % slides.length;
 slides[currentSlide].classList.add('active');
 }
 setInterval(nextSlide, 5000);
-// CV Modal
-// const modal = document.getElementById('cvModal');
-// const viewCV = document.getElementById('viewCV');
-// const closeModal = document.getElementById('closeModal');
-
-// if (modal && viewCV && closeModal) {
-//     viewCV.addEventListener('click', () => {
-//         modal.classList.remove('hidden');
-//         document.body.style.overflow = 'hidden';
-//     });
-
-//     closeModal.addEventListener('click', () => {
-//         modal.classList.add('hidden');
-//         document.body.style.overflow = 'auto';
-//     });
-
-//     modal.addEventListener('click', (e) => {
-//         if (e.target === modal) {
-//             modal.classList.add('hidden');
-//             document.body.style.overflow = 'auto';
-//         }
-//     });
-// }
 
 
 // Like button functionality
