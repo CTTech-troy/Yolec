@@ -1,509 +1,973 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YolecHub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>
-tailwind.config = {
-theme: {
-extend: {
-colors: {
-primary: '#1a237e',
-secondary: '#ffd700'
-},
-borderRadius: {
-'none': '0px',
-'sm': '4px',
-DEFAULT: '8px',
-'md': '12px',
-'lg': '16px',
-'xl': '20px',
-'2xl': '24px',
-'3xl': '32px',
-'full': '9999px',
-'button': '8px'
-}
-}
-}
-}
-</script>
-<style>
-:where([class^="ri-"])::before { content: "\f3c2"; }
-.modal {
-transition: opacity 0.3s ease-in-out;
-backdrop-filter: blur(5px);
-}
-.fade-in {
-opacity: 0;
-transform: translateY(20px);
-transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.fade-in.visible {
-opacity: 1;
-transform: translateY(0);
-}
-.nav-link {
-position: relative;
-}
-.nav-link::after {
-content: '';
-position: absolute;
-width: 0;
-height: 2px;
-bottom: -2px;
-left: 0;
-background-color: #ffd700;
-transition: width 0.3s ease;
-}
-.nav-link:hover::after {
-width: 100%;
-}
-.event-card {
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.event-card:hover {
-transform: translateY(-5px);
-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-.hero-slide {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-opacity: 0;
-transition: opacity 1.5s ease-in-out;
-background-size: cover;
-background-position: center;
-}
-.hero-slide.active {
-opacity: 1;
-}
-.like-button, .comment-button {
-transition: transform 0.2s ease;
-}
-.like-button:hover, .comment-button:hover {
-transform: scale(1.1);
-}
-.like-button.active {
-color: #e53e3e;
-}
-.grid-item {
-overflow: hidden;
-}
-.grid-item img {
-transition: transform 0.5s ease;
-}
-.grid-item:hover img {
-transform: scale(1.05);
-}
-.cta-button {
-position: relative;
-overflow: hidden;
-z-index: 1;
-}
-.cta-button::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-transition: left 0.7s ease;
-z-index: -1;
-}
-.cta-button:hover::before {
-left: 100%;
-}
-.comment-box {
-max-height: 0;
-overflow: hidden;
-transition: max-height 0.3s ease;
-}
-.comment-box.open {
-max-height: 300px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yolec - Educational Events Agency</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#1a365d',secondary:'#c59d5f'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-section {
+            background-image: url('https://readdy.ai/api/search-image?query=elegant%2520educational%2520conference%2520with%2520professional%2520speakers%2520on%2520stage%252C%2520high-end%2520auditorium%2520with%2520sophisticated%2520lighting%252C%2520audience%2520of%2520well-dressed%2520professionals%252C%2520premium%2520atmosphere%252C%2520soft%2520gradient%2520lighting%252C%2520blue%2520and%2520gold%2520accents%252C%2520clean%2520modern%2520design&width=1920&height=1080&seq=1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .glass-card {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .event-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #1a365d;
+        }
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #1a365d;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+        .custom-checkbox:checked {
+            background-color: #1a365d;
+        }
+        .custom-checkbox:checked::after {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 6px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #1a365d;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #c59d5f;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body class="bg-white">
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 shadow-sm">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between h-16 items-center">
-<div class="flex-shrink-0">
-<img src="./images//logo.png" alt="yolecHub" class="h-10">
-</div>
-<div class="hidden md:flex space-x-8">
-<a href="#home" class="nav-link text-gray-700 hover:text-primary">Home</a>
-<a href="#about" class="nav-link text-gray-700 hover:text-primary">About</a>
-<a href="#events" class="nav-link text-gray-700 hover:text-primary">Events</a>
-<a href="#blog" class="nav-link text-gray-700 hover:text-primary">Blog</a>
-<a href="#contact" class="nav-link text-gray-700 hover:text-primary">Contact</a>
-</div>
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+          <a href="#" class="flex items-center">
+          <img
+            src="./images/logo.png"
+            alt="Yolec Logo"
+            class="h-10 w-auto"
+          />
+        </a>            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-800 hover:text-primary font-medium">Home</a>
+                <a href="#about" class="nav-link text-gray-800 hover:text-primary font-medium">About</a>
+                <a href="#events" class="nav-link text-gray-800 hover:text-primary font-medium">Events</a>
+                <a href="#testimonials" class="nav-link text-gray-800 hover:text-primary font-medium">Testimonials</a>
+                <a href="#contact" class="nav-link text-gray-800 hover:text-primary font-medium">Contact</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-800">
+                <i class="ri-menu-line ri-2x"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white w-full">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#home" class="text-gray-800 hover:text-primary font-medium py-2">Home</a>
+                <a href="#about" class="text-gray-800 hover:text-primary font-medium py-2">About</a>
+                <a href="#events" class="text-gray-800 hover:text-primary font-medium py-2">Events</a>
+                <a href="#testimonials" class="text-gray-800 hover:text-primary font-medium py-2">Testimonials</a>
+                <a href="#contact" class="text-gray-800 hover:text-primary font-medium py-2">Contact</a>
+            </div>
+        </div>
+    </header>
 
-</div>
-</div>
-</nav>
-<section id="home" class="relative min-h-screen pt-16">
-<div id="hero-slider" class="absolute inset-0">
-<div class="hero-slide active" style="background-image: url('https://public.readdy.ai/ai/img_res/79e737c2c3d41e6468ffcbf0db80684c.jpg');"></div>
-<div class="hero-slide" style="background-image: url('https://public.readdy.ai/ai/img_res/144caa65c20266523cbbd8912b9401cf.jpg');"></div>
-<div class="hero-slide" style="background-image: url('https://public.readdy.ai/ai/img_res/39933c85b025dfa575b7018e196393a9.jpg');"></div>
-</div>
-<div class="absolute inset-0 bg-black/50"></div>
-<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
-<div class="max-w-3xl fade-in">
-<h1 class="text-5xl md:text-7xl font-bold text-white mb-6">YolecHub</h1>
-<p class="text-xl text-white/90 mb-8">Where Innovation Meets Opportunity - Shaping Tomorrow's Technology Today</p>
-<div class="flex gap-4">
-<button class="cta-button !rounded-button bg-primary text-white px-8 py-3 text-lg cursor-pointer hover:bg-opacity-90 whitespace-nowrap">
-Events
-</button>
-<button class="!rounded-button bg-white text-primary px-8 py-3 text-lg cursor-pointer hover:bg-opacity-90 whitespace-nowrap">
-Learn More
-</button>
-</div>
-</div>
-</div>
-</section>
-<section id="about" class="py-24 bg-gray-50">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="grid md:grid-cols-2 gap-12 items-center">
-<div class="fade-in">
-<img src="./images/founder-img.png" alt="Founder" class="w-full h-[600px] object-cover rounded-lg shadow-lg">
-</div>
-<div class="fade-in">
-<h2 class="text-4xl font-bold text-gray-900 mb-6">Meet Tosin Adesile</h2>
-<p class="text-lg text-gray-600 mb-6">Tosin Adesile is the visionary behind this initiative, dedicated to empowering communities through impactful events and meaningful initiatives.
+    <!-- Hero Section -->
+    <section id="home" class="hero-section min-h-screen flex items-center relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/40"></div>
+        <div class="container mx-auto px-4 z-10">
+            <div class="max-w-3xl text-white">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">Elevating Educational Experiences</h1>
+                <p class="text-xl mb-8">We create transformative educational events that inspire, connect, and empower professionals around the world.</p>
+                <div class="flex flex-wrap gap-4">
+                    <button class="bg-secondary text-white px-8 py-3 rounded-button font-medium hover:bg-secondary/90 transition-all whitespace-nowrap">Explore Events</button>
+                    <button class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-button font-medium hover:bg-white/10 transition-all whitespace-nowrap">Contact Us</button>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-10 h-10 flex items-center justify-center text-white">
+                <i class="ri-arrow-down-line ri-2x"></i>
+            </div>
+        </div>
+    </section>
 
-    With a passion for creating change, Tosin has led numerous projects that have positively influenced lives. His mission is to inspire, educate, and uplift individuals to reach their full potential.</p>
-    <button class="bg-primary text-white px-6 py-3 cursor-pointer hover:bg-opacity-90">
-        View CV
-    </button>
-    
-    <!-- Modal Structure -->
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Meet Tosin Adesile</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="./images/founder-img.png" alt="Founder" class="rounded-lg shadow-xl w-full h-auto object-cover">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-3xl font-semibold text-gray-900 mb-6">Our Vision</h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed">Tosin Adesile is the visionary behind this initiative, dedicated to empowering communities through impactful events and meaningful initiatives.</p>
+                    <p class="text-gray-700 mb-8 leading-relaxed">With a passion for creating change, Tosin has led numerous projects that have positively influenced lives. His mission is to inspire, educate, and uplift individuals to reach their full potential.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-4">
+                                <i class="ri-award-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Excellence</h4>
+                                <p class="text-gray-700 text-sm">We strive for perfection in every event we organize.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-4">
+                                <i class="ri-lightbulb-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Innovation</h4>
+                                <p class="text-gray-700 text-sm">We continuously explore new formats and technologies.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-4">
+                                <i class="ri-team-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Collaboration</h4>
+                                <p class="text-gray-700 text-sm">We build strong partnerships with industry leaders.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-4">
+                                <i class="ri-global-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Global Reach</h4>
+                                <p class="text-gray-700 text-sm">We connect professionals across borders and cultures.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-4xl font-bold mb-2">200+</div>
+                    <p class="text-sm uppercase tracking-wider">Events Organized</p>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2">15</div>
+                    <p class="text-sm uppercase tracking-wider">Countries</p>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2">50k+</div>
+                    <p class="text-sm uppercase tracking-wider">Attendees</p>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2">98%</div>
+                    <p class="text-sm uppercase tracking-wider">Satisfaction Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="text-gray-700 max-w-2xl mx-auto">Discover our carefully curated educational events designed to inspire, connect, and transform your professional journey.</p>
+            </div>
+            
+            <div class="mb-10 flex justify-center">
+                <div class="inline-flex p-1 bg-gray-100 rounded-full">
+                    <button class="px-6 py-2 rounded-full bg-primary text-white whitespace-nowrap">All Events</button>
+                    <button class="px-6 py-2 rounded-full text-gray-700 hover:bg-gray-200 whitespace-nowrap">Conferences</button>
+                    <button class="px-6 py-2 rounded-full text-gray-700 hover:bg-gray-200 whitespace-nowrap">Workshops</button>
+                    <button class="px-6 py-2 rounded-full text-gray-700 hover:bg-gray-200 whitespace-nowrap">Seminars</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Event Card 1 -->
+                <div class="event-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="relative h-60">
+                        <img src="./images/event1.jpeg" alt="Global Education Summit" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-primary text-white text-sm font-semibold py-1 px-3 rounded">Conference</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-2">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>April 28-30, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Global Education Summit 2025</h3>
+                        <p class="text-gray-700 mb-4">Join industry leaders and innovators for three days of inspiring talks, workshops, and networking opportunities focused on the future of education.</p>
+                    </div>
+                </div>
+                
+                <!-- Event Card 2 -->
+                <div class="event-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="relative h-60">
+                      <img src="./images/event8.jpeg" alt="Global Education Summit" class="w-full h-full object-cover">
+                      <div class="absolute top-4 right-4 bg-secondary text-white text-sm font-semibold py-1 px-3 rounded">Workshop</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-2">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>May 15, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Design Thinking for Educators</h3>
+                        <p class="text-gray-700 mb-4">A hands-on workshop teaching educators how to apply design thinking principles to create innovative learning experiences for students.</p>
+                    </div>
+                </div>
+                
+                <!-- Event Card 3 -->
+                <div class="event-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="relative h-60">
+                      <img src="./images/event5.jpeg" alt="Global Education Summit" class="w-full h-full object-cover">
+                      <div class="absolute top-4 right-4 bg-blue-500 text-white text-sm font-semibold py-1 px-3 rounded">Seminar</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-2">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>June 8, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">EdTech Innovation Seminar</h3>
+                        <p class="text-gray-700 mb-4">Explore the latest educational technologies and learn how to effectively integrate them into your curriculum for enhanced learning outcomes.</p>
+                    </div>
+                </div>
+                
+                <!-- Event Card 4 -->
+                <div class="event-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="relative h-60">
+                      <img src="./images/event4.jpeg" alt="Global Education Summit" class="w-full h-full object-cover">
+                      <div class="absolute top-4 right-4 bg-purple-500 text-white text-sm font-semibold py-1 px-3 rounded">Symposium</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-2">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>July 12-13, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Leadership in Education Symposium</h3>
+                        <p class="text-gray-700 mb-4">A premier gathering for educational leaders to discuss strategic challenges, share best practices, and develop innovative solutions.</p>
+                        
+                    </div>
+                </div>
+                
+                <!-- Event Card 5 -->
+                <div class="event-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="relative h-60">
+                      <img src="./images/event12.jpeg" alt="Global Education Summit" class="w-full h-full object-cover">
+                      <div class="absolute top-4 right-4 bg-green-500 text-white text-sm font-semibold py-1 px-3 rounded">Virtual</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-2">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>August 5-6, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Future of Learning Virtual Conference</h3>
+                        <p class="text-gray-700 mb-4">Join this immersive online event exploring emerging trends and technologies shaping the future of education worldwide.</p>
+                        
+                    </div>
+                </div>
+                
+                <!-- Event Card 6 -->
+                <div class="event-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="relative h-60">
+                      <img src="./images/event2.jpeg" alt="Global Education Summit" class="w-full h-full object-cover">
+                      <div class="absolute top-4 right-4 bg-red-500 text-white text-sm font-semibold py-1 px-3 rounded">Masterclass</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-2">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>September 18, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Curriculum Design Masterclass</h3>
+                        <p class="text-gray-700 mb-4">An intensive, hands-on masterclass led by curriculum design expert Dr. Michael Chen, focused on creating engaging, effective learning experiences.</p>
+                       
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="bg-white border border-primary text-primary px-8 py-3 rounded-button font-medium hover:bg-primary/5 transition-all whitespace-nowrap">View All Events</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Event -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Featured Event</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto"></div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="lg:w-1/2">
+                        <img src="./images/event10.jpeg" alt="International Education Forum" class="w-full h-full object-cover">
+                    </div>
+                    <div class="lg:w-1/2 p-8 lg:p-12">
+                        <div class="inline-block bg-primary/10 text-primary font-semibold px-4 py-1 rounded-full text-sm mb-6">Flagship Event</div>
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">International Education Forum 2025</h3>
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>October 15-18, 2025</span>
+                        </div>
+                        <p class="text-gray-700 mb-6 leading-relaxed">The International Education Forum is our premier annual event bringing together over 2,000 education professionals, policymakers, and innovators from more than 50 countries. This four-day conference features keynote presentations, panel discussions, workshops, and networking events focused on transforming education for the future.</p>
+                        
+                        <div class="mb-8">
+                            <div class="flex items-center mb-3">
+                                <div class="w-5 h-5 flex items-center justify-center text-secondary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700">100+ expert speakers and presenters</span>
+                            </div>
+                            <div class="flex items-center mb-3">
+                                <div class="w-5 h-5 flex items-center justify-center text-secondary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700">50+ workshops and breakout sessions</span>
+                            </div>
+                            <div class="flex items-center mb-3">
+                                <div class="w-5 h-5 flex items-center justify-center text-secondary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700">Gala dinner and awards ceremony</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-secondary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700">Exhibition featuring 80+ educational solutions</span>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="flex items-center justify-between">
+                           
+                            <button class="bg-secondary text-white px-6 py-3 rounded-button font-medium hover:bg-secondary/90 transition-all whitespace-nowrap">Reserve Your Spot</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="text-gray-700 max-w-2xl mx-auto">Hear from education professionals who have experienced the transformative power of our events.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <img src="https://readdy.ai/api/search-image?query=professional%2520headshot%2520of%2520middle-aged%2520asian%2520woman%2520with%2520short%2520black%2520hair%252C%2520wearing%2520business%2520attire%252C%2520confident%2520smile%252C%2520neutral%2520background%252C%2520professional%2520lighting%252C%2520corporate%2520portrait&width=100&height=100&seq=10&orientation=squarish" alt="Sarah Chen" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Sarah Chen</h4>
+                            <p class="text-gray-600 text-sm">Director of Learning, TechEd Solutions</p>
+                        </div>
+                    </div>
+                    <div class="mb-4 text-yellow-400 flex">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                    </div>
+                    <p class="text-gray-700 italic">"The Global Education Summit organized by Yolec was truly exceptional. The caliber of speakers, the thoughtful agenda, and the networking opportunities have significantly impacted our approach to educational technology. We've implemented several innovations inspired by the event."</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <img src="https://readdy.ai/api/search-image?query=professional%2520headshot%2520of%2520african%2520american%2520man%2520in%2520his%252040s%252C%2520wearing%2520blue%2520suit%2520and%2520tie%252C%2520confident%2520expression%252C%2520clean%2520background%252C%2520professional%2520corporate%2520portrait%252C%2520studio%2520lighting&width=100&height=100&seq=11&orientation=squarish" alt="Marcus Johnson" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Marcus Johnson</h4>
+                            <p class="text-gray-600 text-sm">Principal, Westlake Academy</p>
+                        </div>
+                    </div>
+                    <div class="mb-4 text-yellow-400 flex">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                    </div>
+                    <p class="text-gray-700 italic">"I've attended numerous educational conferences over my 15-year career, but Yolec's Leadership in Education Symposium stands out for its exceptional organization, relevant content, and the quality of connections made. My entire administrative team now attends annually."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <img src="https://readdy.ai/api/search-image?query=professional%2520headshot%2520of%2520european%2520woman%2520in%2520her%252030s%2520with%2520blonde%2520hair%252C%2520wearing%2520professional%2520business%2520attire%252C%2520friendly%2520smile%252C%2520neutral%2520background%252C%2520corporate%2520portrait%2520style%252C%2520studio%2520lighting&width=100&height=100&seq=12&orientation=squarish" alt="Emma Larsson" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Emma Larsson</h4>
+                            <p class="text-gray-600 text-sm">Education Policy Advisor, Swedish Ministry of Education</p>
+                        </div>
+                    </div>
+                    <div class="mb-4 text-yellow-400 flex">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-half-fill"></i>
+                    </div>
+                    <p class="text-gray-700 italic">"The International Education Forum provided invaluable insights into global education trends and innovative practices. The diverse perspectives from educators worldwide have informed our policy development process and international cooperation initiatives."</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-primary/5 rounded-lg p-8 md:p-12">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-8 md:mb-0 md:pr-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Share Your Experience</h3>
+                        <p class="text-gray-700 mb-6">Have you attended one of our events? We'd love to hear about your experience and feature your testimonial on our website.</p>
+                        <button id="open-testimonial-modal" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition-all whitespace-nowrap">Submit Your Testimonial</button>
+                    </div>
+                    <div class="md:w-1/3 flex justify-center">
+                        <div class="w-20 h-20 flex items-center justify-center text-primary">
+                            <i class="ri-chat-quote-line ri-3x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
   
-    
-</div>
-</div>
-</div>
-</section>
-<section id="events" class="py-24 bg-white">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<h2 class="text-4xl font-bold text-center text-gray-900 mb-12 fade-in">Event Highlights</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
-<img src="./images/event11.jpeg" alt="Workshops" class="w-full h-64 object-cover">
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Entrpreneurship conference</h3>
-<p class="text-gray-600">2019 was the birth of the young people's entrpreneurship conference</p>
-</div>
-</div>
-<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
-<img src="./images/event8.jpeg" alt="Networking" class="w-full h-64 object-cover">
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Conference With Kgan</h3>
-<p class="text-gray-600">was an unforgettable expereince with Kagan.</p>
-</div>
-</div>
-<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
-<img src="./images/event4.jpeg" alt="Pitch Competition" class="w-full h-64 object-cover">
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Startup Pitch Competition</h3>
-<p class="text-gray-600">2020 .</p>
-</div>
-</div>
-<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
-<img src="./images/event5.jpeg" alt="Keynotes" class="w-full h-64 object-cover">
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Keynote Presentations</h3>
-<p class="text-gray-600">Thought-provoking talks from visionary leaders in technology.</p>
-</div>
-</div>
-<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
-<img src="./images/event6.jpeg" alt="Exhibition" class="w-full h-64 object-cover">
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Explore hornbale guests with Yolec</h3>
-<p class="text-gray-600"> An amazing Conference with Yolec we had hornbale guests.</p>
-</div>
-</div>
-<div class="event-card bg-white rounded-lg shadow-md overflow-hidden fade-in grid-item">
-<img src="./images/event7.jpeg" alt="Awards" class="w-full h-64 object-cover">
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Innovation Awards</h3>
-<p class="text-gray-600">Celebrating breakthrough technologies and visionary leaders.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="blog" class="py-24 bg-gray-50">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<h2 class="text-4xl font-bold text-center text-gray-900 mb-12 fade-in">Latest Insights</h2>
-<div class="bg-white rounded-lg shadow-lg overflow-hidden fade-in">
-<div class="p-8">
-<h3 class="text-2xl font-bold text-gray-900 mb-4">The Future of AI in Business Transformation</h3>
-<p class="text-gray-600 mb-6">As we approach 2025, artificial intelligence continues to revolutionize how businesses operate. At this year's Global Tech Summit, industry leaders will explore how AI is not just automating processes but fundamentally reshaping business models and creating new opportunities for innovation and growth.</p>
-<p class="text-gray-600 mb-6">Our keynote speaker, Dr. Elena Rodriguez, will share insights from her groundbreaking research on adaptive AI systems and their implementation across various industries. Attendees will gain practical knowledge on how to leverage these technologies in their own organizations.</p>
-<div class="flex items-center justify-between mt-8">
-<div class="flex items-center text-gray-500">
-<span class="text-sm">May 15, 2024</span>
-<span class="mx-2">•</span>
-<span class="text-sm">By Abdulsalam Korede</span>
-</div>
-<div class="flex space-x-4">
-<button class="like-button flex items-center text-gray-500 hover:text-red-500">
-<i class="ri-heart-line ri-lg mr-1"></i>
-<span class="like-count">24</span>
-</button>
-<button class="comment-button flex items-center text-gray-500 hover:text-primary">
-<i class="ri-chat-1-line ri-lg mr-1"></i>
-<span>12</span>
-</button>
-</div>
-</div>
-<div class="comment-box mt-6 border-t pt-6">
-<h4 class="text-lg font-semibold mb-4">Comments</h4>
-<div class="space-y-4">
-<div class="bg-gray-50 p-4 rounded">
-<div class="flex items-center mb-2">
-<span class="font-medium">Michael Chen</span>
-<span class="text-sm text-gray-500 ml-2">• 2 days ago</span>
-</div>
-<p class="text-gray-600">Looking forward to Dr. Rodriguez's keynote! Her work on adaptive AI has been revolutionary.</p>
-</div>
-<div class="bg-gray-50 p-4 rounded">
-<div class="flex items-center mb-2">
-<span class="font-medium">Sophia Williams</span>
-<span class="text-sm text-gray-500 ml-2">• 1 day ago</span>
-</div>
-<p class="text-gray-600">Will there be any workshops specifically focused on implementing AI in healthcare?</p>
-</div>
-</div>
-<button id="initiateComment" class="mt-4 !rounded-button bg-gray-200 text-gray-700 px-4 py-2 cursor-pointer hover:bg-gray-300 whitespace-nowrap w-full text-left">Write a comment...</button>
-<div id="commentForm" class="mt-4 hidden">
-<textarea id="commentInput" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Add a comment..."></textarea>
-<div class="flex justify-end mt-2">
-<button id="cancelComment" class="!rounded-button bg-gray-200 text-gray-700 px-4 py-2 cursor-pointer hover:bg-gray-300 whitespace-nowrap mr-2">Cancel</button>
-<button id="submitComment" class="!rounded-button bg-primary text-white px-4 py-2 cursor-pointer hover:bg-opacity-90 whitespace-nowrap">Post Comment</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="contact" class="py-24 bg-primary text-white">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-<h2 class="text-4xl font-bold mb-8 fade-in">Ready to Join the Innovation Revolution?</h2>
-<p class="text-xl mb-12 max-w-3xl mx-auto fade-in">Secure your spot at yolecHub and be part of shaping the future of technology.</p>
-<button class="cta-button !rounded-button bg-secondary text-primary px-10 py-4 text-xl font-bold cursor-pointer hover:bg-opacity-90 whitespace-nowrap fade-in">
-Join The Event
-</button>
-<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center fade-in">
-<div>
-<div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-<i class="ri-calendar-line ri-2x"></i>
-</div>
-<h3 class="text-xl font-semibold mb-2">When</h3>
-<p>June 15-17, 2025</p>
-</div>
-<div>
-<div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-<i class="ri-map-pin-line ri-2x"></i>
-</div>
-<h3 class="text-xl font-semibold mb-2">Where</h3>
-<p>Tech Innovation Center, Akure Ondostate</p>
-</div>
-<div>
-<div class="w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-<i class="ri-ticket-line ri-2x"></i>
-</div>
-<h3 class="text-xl font-semibold mb-2">Tickets</h3>
-<p>Free</p>
-</div>
-</div>
-</div>
-</section>
-<footer class="bg-gray-900 text-white py-12">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-<div>
-<img src="./images/logo.png" alt="yolecHub" class="h-10 mb-4">
-<p class="text-gray-400">Bringing together the world's most innovative minds in technology.</p>
-</div>
-<div>
-<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-<ul class="space-y-2">
-<li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
-<li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
-<li><a href="#events" class="text-gray-400 hover:text-white">Events</a></li>
-<li><a href="#blog" class="text-gray-400 hover:text-white">Blog</a></li>
-</ul>
-</div>
-<div>
-<h3 class="text-lg font-semibold mb-4">Contact</h3>
-<ul class="space-y-2">
-<li class="flex items-center"><i class="ri-mail-line mr-2"></i> info@yolechub.com</li>
-<li class="flex items-center"><i class="ri-phone-line mr-2"></i> +234 </li>
-<li class="flex items-center"><i class="ri-map-pin-line mr-2"></i> Akure ondo state</li>
-</ul>
-</div>
-<div>
-<h3 class="text-lg font-semibold mb-4">Follow Us</h3>
-<div class="flex space-x-4">
-<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
-<i class="ri-twitter-x-line"></i>
-</a>
-<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
-<i class="ri-linkedin-line"></i>
-</a>
-<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
-<i class="ri-facebook-line"></i>
-</a>
-<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
-<i class="ri-instagram-line"></i>
-</a>
-</div>
-</div>
-</div>
-<div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-<p>&copy; 2025 yolecHub. All rights reserved.</p>
-</div>
-</div>
-</footer>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="text-gray-700 max-w-2xl mx-auto">Have questions about our events or interested in partnership opportunities? Reach out to our team.</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <form class="bg-white p-8 rounded-lg shadow-lg">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Your email">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Subject">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Your message"></textarea>
+                        </div>
+                        
+                        <div class="mb-6 flex items-start">
+                            <input type="checkbox" id="consent" class="custom-checkbox mr-3 mt-1">
+                            <label for="consent" class="text-gray-700 text-sm">I agree to receive communications from Yolec. You can unsubscribe at any time. View our <a href="#" class="text-primary hover:underline">Privacy Policy</a>.</label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary text-white py-3 rounded-button font-medium hover:bg-primary/90 transition-all whitespace-nowrap">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-white p-8 rounded-lg shadow-lg h-full">
+                        <div class="mb-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Contact Information</h3>
+                            <p class="text-gray-700 mb-6">Our team is here to help you with any questions about our events, partnerships, or services.</p>
+                            
+                            <div class="flex items-start mb-4">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-4">
+                                    <i class="ri-map-pin-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Headquarters</h4>
+                                    <p class="text-gray-700">Elizade University<br>ilara mokin</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start mb-4">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-4">
+                                    <i class="ri-phone-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Phone</h4>
+                                    <p class="text-gray-700">+234 803 721 6846</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start mb-4">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-4">
+                                    <i class="ri-mail-line"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                                    <p class="text-gray-700">info@yolec.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Follow Us</h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="ri-facebook-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="ri-twitter-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="ri-linkedin-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="ri-instagram-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="ri-youtube-fill"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h3 class="text-3xl font-bold mb-4">Stay Updated</h3>
+                    <p class="text-white/80 max-w-md">Subscribe to our newsletter to receive updates on upcoming events, educational insights, and exclusive offers.</p>
+                </div>
+                <div class="md:w-1/2">
+                    <form class="flex flex-col sm:flex-row gap-4">
+                        <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-button border-none text-gray-800">
+                        <button type="submit" class="bg-secondary text-white px-6 py-3 rounded-button font-medium hover:bg-secondary/90 transition-all whitespace-nowrap">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
-// Mock data
-const eventData = [
-{ title: "Interactive Workshops", description: "Hands-on sessions led by industry experts covering AI, blockchain, and more." },
-{ title: "Networking Sessions", description: "Connect with industry leaders, investors, and fellow innovators." },
-{ title: "Startup Pitch Competition", description: "Showcase your innovation and compete for investment opportunities." },
-{ title: "Keynote Presentations", description: "Thought-provoking talks from visionary leaders in technology." },
-{ title: "Tech Exhibition", description: "Explore cutting-edge products and services from leading companies." },
-{ title: "Innovation Awards", description: "Celebrating breakthrough technologies and visionary leaders." }
-];
-const blogData = {
-title: "The Future of AI in Business Transformation",
-content: "As we approach 2025, artificial intelligence continues to revolutionize how businesses operate. At this year's Global Tech Summit, industry leaders will explore how AI is not just automating processes but fundamentally reshaping business models and creating new opportunities for innovation and growth.",
-author: "James Wilson",
-date: "March 15, 2025",
-likes: 24,
-comments: [
-{ name: "Michael Chen", text: "Looking forward to Dr. Rodriguez's keynote! Her work on adaptive AI has been revolutionary.", time: "2 days ago" },
-{ name: "Sophia Williams", text: "Will there be any workshops specifically focused on implementing AI in healthcare?", time: "1 day ago" }
-]
-};
-document.addEventListener('DOMContentLoaded', function() {
-// Fade-in animation
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('visible');
-}
-});
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(element => {
-observer.observe(element);
-});
-// Hero slider
-const slides = document.querySelectorAll('.hero-slide');
-let currentSlide = 0;
-function nextSlide() {
-slides[currentSlide].classList.remove('active');
-currentSlide = (currentSlide + 1) % slides.length;
-slides[currentSlide].classList.add('active');
-}
-setInterval(nextSlide, 5000);
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <p class="text-gray-400 mb-6">Transforming education through innovative and impactful events that connect professionals worldwide.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-facebook-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-twitter-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-linkedin-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-instagram-fill"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#events" class="text-gray-400 hover:text-white transition-colors">Events</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Event Calendar</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Partnerships</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <span class="text-gray-400">Elizade University<br>ilara mokin</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <span class="text-gray-400">+234 803 721 6846</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1">
+                                <i class="ri-mail-line"></i>
+                            </div>
+                            <span class="text-gray-400">info@yolec.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Yolec. All rights reserved.</p>
+               
+            </div>
+        </div>
+    </footer>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all">
+        <i class="ri-arrow-up-line ri-lg"></i>
+    </button>
 
-// Like button functionality
-const likeButton = document.querySelector('.like-button');
-const likeCount = document.querySelector('.like-count');
-let isLiked = false;
-likeButton.addEventListener('click', () => {
-isLiked = !isLiked;
-if (isLiked) {
-likeButton.classList.add('active');
-likeButton.querySelector('i').classList.remove('ri-heart-line');
-likeButton.querySelector('i').classList.add('ri-heart-fill');
-likeCount.textContent = parseInt(likeCount.textContent) + 1;
-} else {
-likeButton.classList.remove('active');
-likeButton.querySelector('i').classList.remove('ri-heart-fill');
-likeButton.querySelector('i').classList.add('ri-heart-line');
-likeCount.textContent = parseInt(likeCount.textContent) - 1;
-}
-});
-// Comment button functionality
-const commentButton = document.querySelector('.comment-button');
-const commentBox = document.querySelector('.comment-box');
-const initiateComment = document.getElementById('initiateComment');
-const commentForm = document.getElementById('commentForm');
-const cancelComment = document.getElementById('cancelComment');
-let commentsOpen = false;
-commentButton.addEventListener('click', () => {
-  commentsOpen = !commentsOpen;
-  if (commentsOpen) {
-    commentBox.classList.add('open');
-  } else {
-    commentBox.classList.remove('open');
-  }
-});
-// Initiate comment functionality
-initiateComment.addEventListener('click', () => {
-  initiateComment.classList.add('hidden');
-  commentForm.classList.remove('hidden');
-});
-// Cancel comment functionality
-cancelComment.addEventListener('click', () => {
-  commentForm.classList.add('hidden');
-  initiateComment.classList.remove('hidden');
-  document.getElementById('commentInput').value = '';
-});
-// Submit comment functionality
-const commentInput = document.getElementById('commentInput');
-const submitComment = document.getElementById('submitComment');
-submitComment.addEventListener('click', () => {
-  const commentText = commentInput.value.trim();
-  if (commentText) {
-    const commentContainer = document.createElement('div');
-    commentContainer.className = 'bg-gray-50 p-4 rounded';
-    const commentHeader = document.createElement('div');
-    commentHeader.className = 'flex items-center mb-2';
-    const nameSpan = document.createElement('span');
-    nameSpan.className = 'font-medium';
-    nameSpan.textContent = 'You';
-    const timeSpan = document.createElement('span');
-    timeSpan.className = 'text-sm text-gray-500 ml-2';
-    timeSpan.textContent = '• just now';
-    const commentBody = document.createElement('p');
-    commentBody.className = 'text-gray-600';
-    commentBody.textContent = commentText;
-    commentHeader.appendChild(nameSpan);
-    commentHeader.appendChild(timeSpan);
-    commentContainer.appendChild(commentHeader);
-    commentContainer.appendChild(commentBody);
-    document.querySelector('.comment-box .space-y-4').appendChild(commentContainer);
-    commentInput.value = '';
-    
-    // Hide form and show button again
-    commentForm.classList.add('hidden');
-    initiateComment.classList.remove('hidden');
-    
-    // Update comment count
-    const commentCount = commentButton.querySelector('span');
-    commentCount.textContent = parseInt(commentCount.textContent) + 1;
-  }
-});
-});
-</script>
+    <!-- Testimonial Modal -->
+    <div id="testimonial-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible opacity-0">
+        <div class="modal-content bg-white rounded-lg shadow-xl max-w-lg w-full mx-4">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900">Share Your Testimonial</h3>
+                    <button id="close-testimonial-modal" class="text-gray-500 hover:text-gray-700">
+                        <div class="w-8 h-8 flex items-center justify-center">
+                            <i class="ri-close-line ri-lg"></i>
+                        </div>
+                    </button>
+                </div>
+                
+                <form>
+                    <div class="mb-4">
+                        <label for="modal-name" class="block text-gray-700 font-medium mb-2">Name</label>
+                        <input type="text" id="modal-name" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Your name">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="modal-company" class="block text-gray-700 font-medium mb-2">Company & Position</label>
+                        <input type="text" id="modal-company" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Company & Position">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="modal-event" class="block text-gray-700 font-medium mb-2">Event Attended</label>
+                        <select id="modal-event" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary pr-8">
+                            <option value="">Select an event</option>
+                            <option value="summit">Global Education Summit</option>
+                            <option value="workshop">Design Thinking Workshop</option>
+                            <option value="seminar">EdTech Innovation Seminar</option>
+                            <option value="symposium">Leadership in Education Symposium</option>
+                            <option value="virtual">Future of Learning Virtual Conference</option>
+                            <option value="masterclass">Curriculum Design Masterclass</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Rating</label>
+                        <div class="flex space-x-2 text-2xl text-gray-300">
+                            <span class="star cursor-pointer" data-rating="1">★</span>
+                            <span class="star cursor-pointer" data-rating="2">★</span>
+                            <span class="star cursor-pointer" data-rating="3">★</span>
+                            <span class="star cursor-pointer" data-rating="4">★</span>
+                            <span class="star cursor-pointer" data-rating="5">★</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="modal-testimonial" class="block text-gray-700 font-medium mb-2">Your Testimonial</label>
+                        <textarea id="modal-testimonial" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Share your experience..."></textarea>
+                    </div>
+                    
+                    <div class="mb-6 flex items-start">
+                        <input type="checkbox" id="modal-consent" class="custom-checkbox mr-3 mt-1">
+                        <label for="modal-consent" class="text-gray-700 text-sm">I consent to having my testimonial and information displayed on the Yolec website.</label>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button type="button" id="cancel-testimonial" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-button mr-4 hover:bg-gray-50 transition-all whitespace-nowrap">Cancel</button>
+                        <button type="submit" class="px-6 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-all whitespace-nowrap">Submit Testimonial</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuToggle.innerHTML = '<i class="ri-menu-line ri-2x"></i>';
+                } else {
+                    menuToggle.innerHTML = '<i class="ri-close-line ri-2x"></i>';
+                }
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuToggle.innerHTML = '<i class="ri-menu-line ri-2x"></i>';
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Testimonial Modal
+            const testimonialModal = document.getElementById('testimonial-modal');
+            const openTestimonialModal = document.getElementById('open-testimonial-modal');
+            const closeTestimonialModal = document.getElementById('close-testimonial-modal');
+            const cancelTestimonial = document.getElementById('cancel-testimonial');
+            
+            function openModal() {
+                testimonialModal.classList.add('active');
+            }
+            
+            function closeModal() {
+                testimonialModal.classList.remove('active');
+            }
+            
+            openTestimonialModal.addEventListener('click', openModal);
+            closeTestimonialModal.addEventListener('click', closeModal);
+            cancelTestimonial.addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside
+            testimonialModal.addEventListener('click', function(e) {
+                if (e.target === testimonialModal) {
+                    closeModal();
+                }
+            });
+            
+            // Star rating in modal
+            const stars = document.querySelectorAll('.star');
+            let currentRating = 0;
+            
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    highlightStars(rating);
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    highlightStars(currentRating);
+                });
+                
+                star.addEventListener('click', function() {
+                    currentRating = parseInt(this.getAttribute('data-rating'));
+                    highlightStars(currentRating);
+                });
+            });
+            
+            function highlightStars(rating) {
+                stars.forEach(star => {
+                    const starRating = parseInt(star.getAttribute('data-rating'));
+                    if (starRating <= rating) {
+                        star.classList.add('text-yellow-400');
+                        star.classList.remove('text-gray-300');
+                    } else {
+                        star.classList.add('text-gray-300');
+                        star.classList.remove('text-yellow-400');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
