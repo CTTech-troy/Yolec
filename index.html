@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
     <style>
         :where([class^="ri-"])::before { content: "\f3c2"; }
         body {
@@ -126,22 +127,7 @@
         .nav-link:hover::after {
             width: 100%;
         }
-        .modal {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-        }
-        .modal.active .modal-content {
-            transform: translateY(0);
-        }
+       
     </style>
 </head>
 <body class="bg-white">
@@ -617,7 +603,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-gray-900 mb-1">Headquarters</h4>
-                                    <p class="text-gray-700">Elizade University ilara mokin</p>
+                                    <p class="text-gray-700">Yolechub House, Ibadan Oko, Ogun State</p>
                                 </div>
                             </div>
                             
@@ -745,7 +731,7 @@
                             <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1">
                                 <i class="ri-map-pin-line"></i>
                             </div>
-                            <span class="text-gray-400">Elizade University ilara mokin</span>
+                            <span class="text-gray-400">Yolechub House, Ibadan Oko, Ogun State</span>
                         </li>
                         <li class="flex items-start">
                             <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1">
@@ -840,7 +826,14 @@
                 </form>
             </div>
         </div>
+    </div> 
+    <!-- model -->
+    <div id="imageModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeImageModal()">&times;</span>
+        <img src="./images/model.jpg" alt="Welcome" />
     </div>
+</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -961,6 +954,26 @@
                 });
             }
         });
+        // Fixed image modal functions
+        function showImageModal() {
+            document.getElementById("imageModal").classList.add("active");
+        }
+
+        function closeImageModal() {
+            document.getElementById("imageModal").classList.remove("active");
+        }
+
+        // Close modal when clicking outside content
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
+
+        window.onload = function () {
+            // Show welcome modal after page loads
+            setTimeout(showImageModal, 1000);
+        };
     </script>
 </body>
 </html>
