@@ -895,65 +895,6 @@
             });
         });
         
-        document.addEventListener('DOMContentLoaded', function() {
-            // Testimonial Modal
-            const testimonialModal = document.getElementById('testimonial-modal');
-            const openTestimonialModal = document.getElementById('open-testimonial-modal');
-            const closeTestimonialModal = document.getElementById('close-testimonial-modal');
-            const cancelTestimonial = document.getElementById('cancel-testimonial');
-            
-            function openModal() {
-                testimonialModal.classList.add('active');
-            }
-            
-            function closeModal() {
-                testimonialModal.classList.remove('active');
-            }
-            
-            openTestimonialModal.addEventListener('click', openModal);
-            closeTestimonialModal.addEventListener('click', closeModal);
-            cancelTestimonial.addEventListener('click', closeModal);
-            
-            // Close modal when clicking outside
-            testimonialModal.addEventListener('click', function(e) {
-                if (e.target === testimonialModal) {
-                    closeModal();
-                }
-            });
-            
-            // Star rating in modal
-            const stars = document.querySelectorAll('.star');
-            let currentRating = 0;
-            
-            stars.forEach(star => {
-                star.addEventListener('mouseover', function() {
-                    const rating = parseInt(this.getAttribute('data-rating'));
-                    highlightStars(rating);
-                });
-                
-                star.addEventListener('mouseout', function() {
-                    highlightStars(currentRating);
-                });
-                
-                star.addEventListener('click', function() {
-                    currentRating = parseInt(this.getAttribute('data-rating'));
-                    highlightStars(currentRating);
-                });
-            });
-            
-            function highlightStars(rating) {
-                stars.forEach(star => {
-                    const starRating = parseInt(star.getAttribute('data-rating'));
-                    if (starRating <= rating) {
-                        star.classList.add('text-yellow-400');
-                        star.classList.remove('text-gray-300');
-                    } else {
-                        star.classList.add('text-gray-300');
-                        star.classList.remove('text-yellow-400');
-                    }
-                });
-            }
-        });
         // Fixed image modal functions
         function showImageModal() {
             document.getElementById("imageModal").classList.add("active");
@@ -975,5 +916,9 @@
             setTimeout(showImageModal, 1000);
         };
     </script>
+    <script src="./form.js"></script>
+    <script src="./db.js" type="module"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 </html>
