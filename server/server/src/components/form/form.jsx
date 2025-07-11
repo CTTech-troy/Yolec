@@ -1,5 +1,3 @@
-// src/components/form.jsx
-
 import React, { useState } from 'react';
 import { database, ref, push } from '../../../firebase'; // adjust if needed
 import Swal from 'sweetalert2';
@@ -33,13 +31,6 @@ const EventRegistrationForm = () => {
       const registrationsRef = ref(database, 'event_registrations');
       await push(registrationsRef, formData);
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful!',
-        text: 'Your registration has been submitted.',
-        confirmButtonColor: '#1a365d',
-      });
-
       setFormData({
         firstName: '',
         lastName: '',
@@ -48,6 +39,17 @@ const EventRegistrationForm = () => {
         institution: '',
         event: '',
       });
+
+      await Swal.fire({
+        icon: 'success',
+        title: 'Registration Successful!',
+        text: 'Your registration has been submitted.',
+        confirmButtonColor: '#1a365d',
+      });
+
+      // Redirect after user clicks OK
+      window.location.href = 'https://yolechub.com.ng/';
+
     } catch (error) {
       console.error('❌ Error submitting registration:', error);
 
