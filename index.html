@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="./server/client/style.css">
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
@@ -285,8 +286,7 @@
                 <p class="text-gray-700 max-w-2xl mx-auto">Discover our carefully curated educational events designed to inspire, connect, and transform your professional journey.</p>
             </div>
             
-         
-            
+       
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Event Card 1 -->
                 <div class="event-card bg-white rounded-lg shadow-lg overflow-hidden">
@@ -476,63 +476,14 @@
                 <p class="text-gray-700 max-w-2xl mx-auto">Hear from education professionals who have experienced the transformative power of our events.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="testimonialsGrid">
                 <!-- Testimonial 1 -->
-                <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg">
-                    <div class="flex items-center mb-6">
-                        <img src="https://readdy.ai/api/search-image?query=professional%2520headshot%2520of%2520middle-aged%2520asian%2520woman%2520with%2520short%2520black%2520hair%252C%2520wearing%2520business%2520attire%252C%2520confident%2520smile%252C%2520neutral%2520background%252C%2520professional%2520lighting%252C%2520corporate%2520portrait&width=100&height=100&seq=10&orientation=squarish" alt="Sarah Chen" class="w-16 h-16 rounded-full object-cover mr-4">
-                        <div>
-                            <h4 class="font-semibold text-gray-900">Sarah Chen</h4>
-                            <p class="text-gray-600 text-sm">Director of Learning, TechEd Solutions</p>
-                        </div>
-                    </div>
-                    <div class="mb-4 text-yellow-400 flex">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
-                    <p class="text-gray-700 italic">"The Global Education Summit organized by Yolec was truly exceptional. The caliber of speakers, the thoughtful agenda, and the networking opportunities have significantly impacted our approach to educational technology. We've implemented several innovations inspired by the event."</p>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg">
-                    <div class="flex items-center mb-6">
-                        <img src="https://readdy.ai/api/search-image?query=professional%2520headshot%2520of%2520african%2520american%2520man%2520in%2520his%252040s%252C%2520wearing%2520blue%2520suit%2520and%2520tie%252C%2520confident%2520expression%252C%2520clean%2520background%252C%2520professional%2520corporate%2520portrait%252C%2520studio%2520lighting&width=100&height=100&seq=11&orientation=squarish" alt="Marcus Johnson" class="w-16 h-16 rounded-full object-cover mr-4">
-                        <div>
-                            <h4 class="font-semibold text-gray-900">Marcus Johnson</h4>
-                            <p class="text-gray-600 text-sm">Principal, Westlake Academy</p>
-                        </div>
-                    </div>
-                    <div class="mb-4 text-yellow-400 flex">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
-                    <p class="text-gray-700 italic">"I've attended numerous educational conferences over my 15-year career, but Yolec's Leadership in Education Symposium stands out for its exceptional organization, relevant content, and the quality of connections made. My entire administrative team now attends annually."</p>
-                </div>
+                    <!-- <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg" id="testimonialsGrid"></div> -->
+
+              
                 
                 <!-- Testimonial 3 -->
-                <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg">
-                    <div class="flex items-center mb-6">
-                        <img src="https://readdy.ai/api/search-image?query=professional%2520headshot%2520of%2520european%2520woman%2520in%2520her%252030s%2520with%2520blonde%2520hair%252C%2520wearing%2520professional%2520business%2520attire%252C%2520friendly%2520smile%252C%2520neutral%2520background%252C%2520corporate%2520portrait%2520style%252C%2520studio%2520lighting&width=100&height=100&seq=12&orientation=squarish" alt="Emma Larsson" class="w-16 h-16 rounded-full object-cover mr-4">
-                        <div>
-                            <h4 class="font-semibold text-gray-900">Emma Larsson</h4>
-                            <p class="text-gray-600 text-sm">Education Policy Advisor, Swedish Ministry of Education</p>
-                        </div>
-                    </div>
-                    <div class="mb-4 text-yellow-400 flex">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-half-fill"></i>
-                    </div>
-                    <p class="text-gray-700 italic">"The International Education Forum provided invaluable insights into global education trends and innovative practices. The diverse perspectives from educators worldwide have informed our policy development process and international cooperation initiatives."</p>
-                </div>
+                
             </div>
             
             <div class="mt-16 bg-primary/5 rounded-lg p-8 md:p-12">
@@ -766,70 +717,49 @@
     </button>
 
     <!-- Testimonial Modal -->
-    <div id="testimonial-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible opacity-0">
-        <div class="modal-content bg-white rounded-lg shadow-xl max-w-lg w-full mx-4">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-900">Share Your Testimonial</h3>
-                    <button id="close-testimonial-modal" class="text-gray-500 hover:text-gray-700">
-                        <div class="w-8 h-8 flex items-center justify-center">
-                            <i class="ri-close-line ri-lg"></i>
-                        </div>
-                    </button>
-                </div>
-                
-                <form>
-                    <div class="mb-4">
-                        <label for="modal-name" class="block text-gray-700 font-medium mb-2">Name</label>
-                        <input type="text" id="modal-name" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Your name">
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label for="modal-company" class="block text-gray-700 font-medium mb-2">Company & Position</label>
-                        <input type="text" id="modal-company" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Company & Position">
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label for="modal-event" class="block text-gray-700 font-medium mb-2">Event Attended</label>
-                        <select id="modal-event" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary pr-8">
-                            <option value="">Select an event</option>
-                            <option value="summit">Global Education Summit</option>
-                            <option value="workshop">Design Thinking Workshop</option>
-                            <option value="seminar">EdTech Innovation Seminar</option>
-                            <option value="symposium">Leadership in Education Symposium</option>
-                            <option value="virtual">Future of Learning Virtual Conference</option>
-                            <option value="masterclass">Curriculum Design Masterclass</option>
-                        </select>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2">Rating</label>
-                        <div class="flex space-x-2 text-2xl text-gray-300">
-                            <span class="star cursor-pointer" data-rating="1">★</span>
-                            <span class="star cursor-pointer" data-rating="2">★</span>
-                            <span class="star cursor-pointer" data-rating="3">★</span>
-                            <span class="star cursor-pointer" data-rating="4">★</span>
-                            <span class="star cursor-pointer" data-rating="5">★</span>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label for="modal-testimonial" class="block text-gray-700 font-medium mb-2">Your Testimonial</label>
-                        <textarea id="modal-testimonial" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Share your experience..."></textarea>
-                    </div>
-                    
-                    <div class="mb-6 flex items-start">
-                        <input type="checkbox" id="modal-consent" class="custom-checkbox mr-3 mt-1">
-                        <label for="modal-consent" class="text-gray-700 text-sm">I consent to having my testimonial and information displayed on the Yolec website.</label>
-                    </div>
-                    
-                    <div class="flex justify-end">
-                        <button type="button" id="cancel-testimonial" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-button mr-4 hover:bg-gray-50 transition-all whitespace-nowrap">Cancel</button>
-                        <button type="submit" class="px-6 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-all whitespace-nowrap">Submit Testimonial</button>
-                    </div>
-                </form>
-            </div>
+    <div id="testimonial-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible opacity-0 transition-all duration-300">
+      <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 sm:mx-6 md:mx-0 p-4 sm:p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Share Your Testimonial</h3>
+          <button id="close-testimonial-modal" class="text-gray-500 hover:text-gray-700">
+            <span class="w-8 h-8 flex items-center justify-center">
+              <i class="ri-close-line ri-lg"></i>
+            </span>
+          </button>
         </div>
+        <form>
+          <div class="mb-4">
+            <label for="modal-name" class="block text-gray-700 font-medium mb-2">Name</label>
+            <input type="text" id="modal-name" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Your name">
+          </div>
+          <div class="mb-4">
+            <label for="modal-company" class="block text-gray-700 font-medium mb-2">Company & Position</label>
+            <input type="text" id="modal-company" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Company & Position">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">Rating</label>
+            <div class="flex space-x-2 text-2xl text-gray-300">
+              <span class="star cursor-pointer" data-rating="1">★</span>
+              <span class="star cursor-pointer" data-rating="2">★</span>
+              <span class="star cursor-pointer" data-rating="3">★</span>
+              <span class="star cursor-pointer" data-rating="4">★</span>
+              <span class="star cursor-pointer" data-rating="5">★</span>
+            </div>
+          </div>
+          <div class="mb-6">
+            <label for="modal-testimonial" class="block text-gray-700 font-medium mb-2">Your Testimonial</label>
+            <textarea id="modal-testimonial" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Share your experience..."></textarea>
+          </div>
+          <div class="mb-6 flex items-start">
+            <input type="checkbox" id="modal-consent" class="custom-checkbox mr-3 mt-1">
+            <label for="modal-consent" class="text-gray-700 text-sm">I consent to having my testimonial and information displayed on the Yolec website.</label>
+          </div>
+          <div class="flex flex-col sm:flex-row justify-end gap-3">
+            <button type="button" id="cancel-testimonial" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-button hover:bg-gray-50 transition-all whitespace-nowrap w-full sm:w-auto">Cancel</button>
+            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-all whitespace-nowrap w-full sm:w-auto">Submit Testimonial</button>
+          </div>
+        </form>
+      </div>
     </div> 
     <!-- model -->
     <div id="imageModal" class="modal">
@@ -844,10 +774,11 @@
         </button>
     </div>
 </div>
-
+       
 
 
     <script>
+      
         document.addEventListener('DOMContentLoaded', function() {
             // Mobile menu toggle
             const menuToggle = document.getElementById('menu-toggle');
@@ -906,6 +837,7 @@
                 });
             });
         });
+               
         
         
     </script>
@@ -914,5 +846,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src=./server/client/model.js></script>
     <script  type="module" src="./server/client/letter.js"></script>
+    <script type="module" src="./server/client/testimonials-fetch.js"></script>
+
 </body>
 </html>

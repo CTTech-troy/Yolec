@@ -155,6 +155,7 @@ if (contactForm) {
       const eventAttended = document.getElementById("modal-event")?.value.trim() || "";
       const testimonial = document.getElementById("modal-testimonial")?.value.trim() || "";
       const consent = document.getElementById("modal-consent")?.checked || false;
+      const published = document.getElementById("modal-published")?.checked || false;
 
       if (!name || !testimonial) {
         if (typeof Swal !== 'undefined') {
