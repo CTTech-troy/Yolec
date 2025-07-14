@@ -20,73 +20,84 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+// Make Firebase functions available globally for other scripts if needed
+window.db = db;
+window.ref = ref;
+window.push = push;
+
 // ===== When DOM Ready =====
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ============================
-  // ======= CONTACT FORM =======
-  // ============================
-  const contactForm = document.querySelector('#contact form');
+ // ============================
+// ======= CONTACT FORM =======
+// ============================
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
+// Ensure Firebase is initialized elsewhere in your project
+// Example:
+// import { getDatabase, ref, push } from "firebase/database";
+// const db = getDatabase();
 
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const subject = document.getElementById('subject').value.trim();
-      const message = document.getElementById('message').value.trim();
-      const consent = document.getElementById('consent').checked;
+const contactForm = document.querySelector('#contact form');
 
-      const contactData = {
-        name,
-        email,
-        subject,
-        message,
-        consent,
-        timestamp: new Date().toISOString(),
-      };
+if (contactForm) {
+  contactForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-      console.log("Contact form data:", contactData);
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const consent = document.getElementById('consent').checked; // ✅ capture consent checkbox state
 
-      const submitButton = contactForm.querySelector('button[type="submit"]');
-      const originalButtonText = submitButton.textContent;
+    const contactData = {
+      name,
+      email,
+      subject,
+      message,
+      consent, // ✅ store consent in DB
+      timestamp: Date.now() // ✅ store milliseconds for easy sorting
+    };
 
-      submitButton.textContent = "Sending...";
-      submitButton.disabled = true;
+    console.log("Contact form data to save:", contactData);
 
-      try {
-        const contactRef = ref(db, 'contacts');
-        await push(contactRef, contactData);
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
 
-        if (typeof Swal !== 'undefined') {
-          await Swal.fire({
-            icon: 'success',
-            title: 'Message Sent!',
-            text: 'Your message has been sent successfully.',
-          });
-        } else {
-          alert("Your message has been sent successfully.");
-        }
+    submitButton.textContent = "Sending...";
+    submitButton.disabled = true;
 
-        contactForm.reset();
-      } catch (error) {
-        console.error("Error saving contact:", error);
-        if (typeof Swal !== 'undefined') {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'There was a problem sending your message.',
-          });
-        } else {
-          alert("There was a problem sending your message.");
-        }
-      } finally {
-        submitButton.textContent = originalButtonText;
-        submitButton.disabled = false;
+    try {
+      const contactRef = ref(db, 'contactsin'); // ✅ correct collection
+      await push(contactRef, contactData); // ✅ push data including consent & timestamp
+
+      if (typeof Swal !== 'undefined') {
+        await Swal.fire({
+          icon: 'success',
+          title: 'Message Sent!',
+          text: 'Your message has been sent successfully.',
+        });
+      } else {
+        alert("Your message has been sent successfully.");
       }
-    });
-  }
+
+      contactForm.reset();
+    } catch (error) {
+      console.error("Error saving contact:", error);
+      if (typeof Swal !== 'undefined') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'There was a problem sending your message.',
+        });
+      } else {
+        alert("There was a problem sending your message.");
+      }
+    } finally {
+      submitButton.textContent = originalButtonText;
+      submitButton.disabled = false;
+    }
+  });
+}
 
   // ============================
   // ===== TESTIMONIAL MODAL ====

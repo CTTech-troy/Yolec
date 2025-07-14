@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="./server/client/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         :where([class^="ri-"])::before { content: "\f3c2"; }
         body {
@@ -278,7 +280,7 @@
     <section id="events" class="py-20">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Events</h2>
                 <div class="w-20 h-1 bg-secondary mx-auto mb-6"></div>
                 <p class="text-gray-700 max-w-2xl mx-auto">Discover our carefully curated educational events designed to inspire, connect, and transform your professional journey.</p>
             </div>
@@ -665,8 +667,8 @@
                     <p class="text-white/80 max-w-md">Subscribe to our newsletter to receive updates on upcoming events, educational insights, and exclusive offers.</p>
                 </div>
                 <div class="md:w-1/2">
-                    <form class="flex flex-col sm:flex-row gap-4">
-                        <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-button border-none text-gray-800">
+                    <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4">
+                        <input id="newsletter-email" type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-button border-none text-gray-800" required>
                         <button type="submit" class="bg-secondary text-white px-6 py-3 rounded-button font-medium hover:bg-secondary/90 transition-all whitespace-nowrap">Subscribe</button>
                     </form>
                 </div>
@@ -833,7 +835,7 @@
     <div id="imageModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeImageModal()">&times;</span>
-        <img id="modalImage" src="./server/client/images/model2.jpg" alt="Welcome" />
+        <img id="modalImage" src="" alt="Welcome" />
         <button
             class="px-5 py-2 bg-primary text-white rounded-button hover:bg-primary/90 transition-all whitespace-nowrap mt-3"
             onclick="window.location.href='https://superlative-cheesecake-d0dcdb.netlify.app/'"
@@ -842,6 +844,7 @@
         </button>
     </div>
 </div>
+
 
 
     <script>
@@ -906,10 +909,10 @@
         
         
     </script>
-    <script src="./server/client/form.js"></script>
-    <script src="./server/client/db.js" type="module"> </script>
+    <script  type="module" src="./server/client/form.js"></script>
+    <script  type="module" src="./server/client/db.js" type="module"> </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./server/client/model.js"></script>
-
+    <script type="module" src=./server/client/model.js></script>
+    <script  type="module" src="./server/client/letter.js"></script>
 </body>
 </html>
