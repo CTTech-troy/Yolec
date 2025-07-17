@@ -21,6 +21,8 @@ const db = getDatabase(app);
 // ===== Modal Logic =====
 const modal = document.getElementById("imageModal");
 const modalImage = document.getElementById("modalImage");
+const registerButton = document.querySelector("#imageModal button");
+
 let imageInterval = null;
 let currentImageIndex = 0;
 let publishedImages = [];
@@ -45,13 +47,11 @@ modal.addEventListener('click', (e) => {
 // Close modal on close button
 document.querySelector('#imageModal .close-btn').addEventListener('click', closeImageModal);
 
-// ===== Show Default Image Immediately =====
+// ===== Show Images from Firebase on Load =====
 window.addEventListener('load', () => {
   try {
-    // Show default image immediately while loading Firebase
-    modalImage.src = "./server/client/images/model3.jpg";
-    modalImage.alt = "Welcome image";
-    showImageModal();
+    // Hide the register button by default
+    registerButton.style.display = "none";
 
     // Fetch published blog images from Firebase
     const blogsRef = ref(db, 'blogs');
@@ -63,7 +63,6 @@ window.addEventListener('load', () => {
         if (blogs) {
           Object.values(blogs).forEach(blog => {
             if (blog.published === true && blog.image) {
-              // Ensure Base64 prefix if missing
               if (!blog.image.startsWith("data:image")) {
                 const safeImage = `data:image/jpeg;base64,${blog.image}`;
                 publishedImages.push(safeImage);
@@ -75,14 +74,19 @@ window.addEventListener('load', () => {
         }
 
         if (publishedImages.length === 0) {
-          console.warn("⚠️ No published images found in Firebase blogs. Check that 'published' is true and 'image' exists for each blog.");
-          console.log("Snapshot data received:", blogs);
-          return; // Keep default image
+          console.warn("⚠️ No published images found in Firebase blogs. Button will remain hidden.");
+          return; // Do not display modal or button
         }
 
         // Replace with first published image
         currentImageIndex = 0;
         displayImage(publishedImages[currentImageIndex]);
+
+        // Show modal now that we have an active image
+        showImageModal();
+
+        // Show the register button
+        registerButton.style.display = "inline-block";
 
         // Cycle through images if multiple
         if (publishedImages.length > 1) {
@@ -114,8 +118,8 @@ window.addEventListener('load', () => {
 // ===== Display Image Helper with Fallback =====
 function displayImage(src) {
   modalImage.onerror = () => {
-    console.error(`❌ Failed to load image: ${src.slice(0, 50)}... Reverting to default.`);
-    modalImage.src = "./server/client/images/model3.jpg";
+    console.error(`❌ Failed to load image: ${src.slice(0, 50)}... Hiding modal.`);
+    closeImageModal();
   };
   modalImage.src = src;
   modalImage.alt = "Published blog image";
