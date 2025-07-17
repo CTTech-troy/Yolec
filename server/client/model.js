@@ -124,3 +124,11 @@ function displayImage(src) {
   modalImage.src = src;
   modalImage.alt = "Published blog image";
 }
+// Hide loader overlay when the page is fully loaded
+// ✅ Ensure this runs after all content is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('load', () => {
+    const loaderOverlay = document.getElementById('loader-overlay');
+    if (loaderOverlay) loaderOverlay.style.display = 'none';
+  });
+});

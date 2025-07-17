@@ -91,3 +91,11 @@ onValue(modelImagesRef, (snapshot) => {
 }, (error) => {
     console.error("❌ Error fetching data from 'modelImages':", error);
 });
+// Hide loader overlay when the page is fully loaded
+// ✅ Ensure this runs after all content is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('load', () => {
+    const loaderOverlay = document.getElementById('loader-overlay');
+    if (loaderOverlay) loaderOverlay.style.display = 'none';
+  });
+});
