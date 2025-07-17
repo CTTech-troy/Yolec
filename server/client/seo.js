@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Set page title
-    document.title = "JavaScript SEO Optimization Guide | YourSite";
+    document.title = "Yolec Hub - Entrepreneurship Hub";
 
     // Set meta description
     let metaDesc = document.querySelector('meta[name="description"]');
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         metaDesc.name = "description";
         document.head.appendChild(metaDesc);
     }
-    metaDesc.content = "Learn practical JavaScript SEO optimization techniques to rank your site on Google.";
+    metaDesc.content = "Yolec Hub - Entrepreneurship Hub, transformative educational events that inspire, connect, and empower professionals around the world.";
 
     // Set canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
@@ -33,6 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setOgTag("og:title", "Entrepreneurship Hub - Yolec Hub");
     setOgTag("og:description", "transformative educational events that inspire, connect, and empower professionals around the world.");
-    setOgTag("og:url", window.location.href.replace(https://yolechub.com.ng/,));
+    setOgTag("og:url", window.location.href);
     setOgTag("og:type", "website");
 });
