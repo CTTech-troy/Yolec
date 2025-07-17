@@ -1,3 +1,4 @@
+// ✅ Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
 
@@ -33,7 +34,7 @@ const modelImagesRef = ref(db, 'modelImages');
 // ✅ Select the container for event cards
 const container = document.getElementById('event-cards-container');
 
-// ✅ Listen for published data and render
+// ✅ Listen for published data and render latest images first
 onValue(modelImagesRef, (snapshot) => {
     container.innerHTML = '';
 
@@ -41,61 +42,65 @@ onValue(modelImagesRef, (snapshot) => {
         const data = snapshot.val();
         let publishedCount = 0;
 
-        Object.keys(data).forEach((key) => {
-            const item = data[key];
+        Object.keys(data)
+            .sort((a, b) => {
+                const dateA = new Date(data[a].uploadDate || 0);
+                const dateB = new Date(data[b].uploadDate || 0);
+                return dateB - dateA; // latest first
+            })
+            .forEach((key) => {
+                const item = data[key];
 
-            if (item.status && item.status.toLowerCase() === "published") {
-                publishedCount++;
+                if (item.status && item.status.toLowerCase() === "published") {
+                    publishedCount++;
 
-                const imgSrc = ensureBase64Prefix(item.url);
-                const tag = item.type || "Event";
-                const date = item.uploadDate || "TBD";
-                const title = item.title || "Untitled Event";
-                const description = item.description || "No description available.";
+                    const imgSrc = ensureBase64Prefix(item.url);
+                    const tag = item.type || "Event";
+                    const date = item.uploadDate || "TBD";
+                    const title = item.title || "Untitled Event";
+                    const description = item.description || "No description available.";
 
-                // ✅ Build card HTML
-                const card = document.createElement('div');
-                card.className = "event-card bg-white rounded-lg shadow-lg overflow-hidden";
+                    const card = document.createElement('div');
+                    card.className = "event-card bg-white rounded-lg shadow-lg overflow-hidden";
 
-                card.innerHTML = `
-                    <div class="relative h-60">
-                        <img src="${imgSrc}" alt="${title}" class="w-full h-full object-cover">
-                        <div class="absolute top-4 right-4 bg-primary text-white text-sm font-semibold py-1 px-3 rounded">${tag}</div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center text-gray-500 text-sm mb-2">
-                            <div class="w-4 h-4 flex items-center justify-center mr-2">
-                                <i class="ri-calendar-line"></i>
-                            </div>
-                            <span>${date}</span>
+                    card.innerHTML = `
+                        <div class="relative h-60">
+                            <img src="${imgSrc}" alt="${title}" class="w-full h-full object-cover">
+                            <div class="absolute top-4 right-4 bg-primary text-white text-sm font-semibold py-1 px-3 rounded">${tag}</div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">${title}</h3>
-                        <p class="text-gray-700 mb-4">${description}</p>
-                    </div>
-                `;
+                        <div class="p-6">
+                            <div class="flex items-center text-gray-500 text-sm mb-2">
+                                <div class="w-4 h-4 flex items-center justify-center mr-2">
+                                    <i class="ri-calendar-line"></i>
+                                </div>
+                                <span>${date}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">${title}</h3>
+                            <p class="text-gray-700 mb-4">${description}</p>
+                        </div>
+                    `;
 
-                container.appendChild(card);
-                console.log(`✅ Displayed published event: ${title}`);
-            } else {
-                console.log(`⛔ Skipped ${key} (not published)`);
-            }
-        });
+                    container.appendChild(card);
+                    console.log(`✅ Displayed published event: ${title}`);
+                } else {
+                    console.log(`⛔ Skipped ${key} (not published)`);
+                }
+            });
 
         if (publishedCount === 0) {
             console.log("ℹ️ No published items to display from 'modelImages'.");
         }
-
     } else {
         console.log("ℹ️ No data available in 'modelImages'.");
     }
 }, (error) => {
     console.error("❌ Error fetching data from 'modelImages':", error);
 });
-// Hide loader overlay when the page is fully loaded
-// ✅ Ensure this runs after all content is loaded
+
+// ✅ Hide loader overlay when page fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-  window.addEventListener('load', () => {
-    const loaderOverlay = document.getElementById('loader-overlay');
-    if (loaderOverlay) loaderOverlay.style.display = 'none';
-  });
+    window.addEventListener('load', () => {
+        const loaderOverlay = document.getElementById('loader-overlay');
+        if (loaderOverlay) loaderOverlay.style.display = 'none';
+    });
 });
